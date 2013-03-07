@@ -2,14 +2,16 @@
 #./pdftex-1.40.10/src/libs/xpdf/xpdf-3.02/xpdf/
 #/Users/d332027/Developer/PDF/poppler-0.20.1
 
-SRCDIR = /Users/d332027/Developer/PDF/poppler-0.20.1
+#SRCDIR = /Users/d332027/Developer/PDF/poppler-0.20.1
+SRCDIR = 
 OBJDIR = $(SRCDIR)/poppler
-LIBS = $(OBJDIR)/Annot.o $(OBJDIR)/Gfx.o  -L/opt/local/lib -ltiff -L/usr/local/lib -lpoppler
-INCLUDES = -I$(SRCDIR) -I$(SRCDIR)/poppler -I$(SRCDIR)/goo -I/opt/local/include 
+OBJLIBS = $(OBJDIR)/Annot.o $(OBJDIR)/Gfx.o  
+LIBS = -ltiff -L/usr/local/lib -lpoppler
+INCLUDES = -I/usr/local/include/poppler/  
 
 DEFINES = -DPDF_PARSER_ONLY -DPOPPLER_VERSION="0.20"
 
-all: pdfinfl pdfpage pdffonts pdfimag
+all:  pdfpage pdfimag pdffonts
 
 pdfpagepop: pdfpagepop.o
 
@@ -26,3 +28,7 @@ pdfimag: pdfimag.o
 
 %: %.o
 	g++ $(LIBS) $< -o $@
+
+
+clean:
+	rm -f pdfinfl pdfpage pdffonts pdfimag

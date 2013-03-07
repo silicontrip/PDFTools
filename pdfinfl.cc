@@ -39,17 +39,17 @@ Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #include <gfile.h>
 #endif
 
-#include "Object.h"
-#include "Stream.h"
-#include "Array.h"
-#include "Dict.h"
-#include "XRef.h"
-#include "Catalog.h"
-#include "Page.h"
-#include "GfxFont.h"
-#include "PDFDoc.h"
-#include "GlobalParams.h"
-#include "Error.h"
+#include <Object.h>
+#include <Stream.h>
+#include <Array.h>
+#include <Dict.h>
+#include <XRef.h>
+#include <Catalog.h>
+#include <Page.h>
+#include <GfxFont.h>
+#include <PDFDoc.h>
+#include <GlobalParams.h>
+#include <Error.h>
 
 static XRef *xref = 0;
 
@@ -122,7 +122,7 @@ int main(int argc, char *argv[])
 
 // output xref and trailer
 
-        int size = xref->getSize();
+        int size = xref->getNumObjects();
         int i;
         for (i = 0; i < size; i++) {
             if (xref->getEntry(i)->offset == 0xffffffff)
@@ -143,7 +143,7 @@ int main(int argc, char *argv[])
                 Object tmpObj;
 
                 xref->fetch(i, e->gen, &tmpObj);        // to ensure xref->objStr is set
-                ObjectStream *objStr = xref->getObjStr();
+                Stream *objStr = tmpObj.getStream();
                 assert(objStr != NULL);
                 int *localOffsets = objStr->getOffsets();
                 assert(localOffsets != NULL);

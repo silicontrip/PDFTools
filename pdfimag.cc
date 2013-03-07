@@ -6,7 +6,7 @@
 //
 //========================================================================
 
-#include <aconf.h>
+// #include <aconf.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stddef.h>
@@ -16,9 +16,9 @@
 #include <sys/mman.h>
 #include <fcntl.h>
 
-#include "parseargs.h"
-#include "GString.h"
-#include "gmem.h"
+// #include "parseargs.h"
+#include <goo/GooString.h>
+// #include "gmem.h"
 #include "GlobalParams.h"
 #include "Error.h"
 #include "Object.h"
@@ -294,8 +294,8 @@ static void saveImage(int objnum, int objgen, PDFDoc *doc)
 
 int main(int argc, char *argv[]) {
 	PDFDoc *doc;
-	GString *fileName;
-	GString *ownerPW, *userPW;
+	GooString *fileName;
+	GooString *ownerPW, *userPW;
 	GBool ok;
 	Page *page;
 	Dict *resDict;
@@ -316,7 +316,7 @@ int main(int argc, char *argv[]) {
 		}
 		goto err0;
 	}
-	fileName = new GString(argv[1]);
+	fileName = new GooString(argv[1]);
 	
 	// read config file
 	//globalParams = new GlobalParams(cfgFileName);
@@ -325,12 +325,12 @@ int main(int argc, char *argv[]) {
 	
 	// open PDF file
 	if (ownerPassword[0] != '\001') {
-		ownerPW = new GString(ownerPassword);
+		ownerPW = new GooString(ownerPassword);
 	} else {
 		ownerPW = NULL;
 	}
 	if (userPassword[0] != '\001') {
-		userPW = new GString(userPassword);
+		userPW = new GooString(userPassword);
 	} else {
 		userPW = NULL;
 	}
